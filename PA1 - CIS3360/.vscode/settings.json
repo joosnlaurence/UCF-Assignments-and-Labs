@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
         "ptext"
-    ]
+    ],
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }

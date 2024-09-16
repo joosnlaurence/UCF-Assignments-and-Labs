@@ -18,7 +18,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -45,23 +44,37 @@ vector<vector<int>> multMatrices(const vector<vector<int>> &m1, const vector<vec
 }  
 
 string hillCipher(const string &ptext, const vector<vector<int>> &key){
+    if(key.size() <= 1)
+        throw "Error: Key matrix is less than 2x2";
+    else if(key.size() != key[0].size())
+        throw "Error: Key matrix is not square";
+    
     int numBlocks = ptext.length()/key.size();
     int blocksize = key.size();
     string ciphertext = ""; 
     vector<vector<int>> ptextChars(key.size(), vector<int>(1));
 
     for(int i = 0; i<numBlocks; i++){
-        string block = ptext.substr(i*blocksize, (i+1)*blocksize);
+        string block = ptext.substr(i*blocksize, blocksize);
         for(int j = 0; j<block.size(); j++){
             ptextChars[j][0] = block[j]-'a';
         }
 
         vector<vector<int>> cipherMatrix = multMatrices(key, ptextChars);
         for(int k = 0; k<cipherMatrix.size(); k++){
-            ciphertext = (char)(cipherMatrix[k][0] % 26 + 'a');
+            ciphertext += (char)(cipherMatrix[k][0] % 26 + 'a');
         }
     }
     return ciphertext;
+}
+
+// Prints text that newlines after every lnWidth characters are printed.
+void printText(const string &str, int lnWidth){
+    int i;
+    for(i = 0; i<(str.length() / lnWidth); i++)
+        cout << str.substr(i*lnWidth, lnWidth) << '\n';
+    if(str.length() % lnWidth != 0)
+        cout << str.substr(i*lnWidth) << '\n';
 }
 
 // argv[1]=key, argv[2]=plaintext
@@ -83,11 +96,11 @@ int main(int argc, char* argv[]){
     keyF >> n;
     vector<vector<int>> keyMatrix(n, vector<int>(n));
 
-    cout << "Key matrix:\n";
+    cout << "\nKey matrix:\n";
     for(int i = 0; i<n; i++){
         for(int j = 0; j<n; j++){
             keyF >> keyMatrix[i][j];
-            cout << setw(4) << right << keyMatrix[i][j] << " ";
+            cout << setw(4) << right << keyMatrix[i][j];
         }
         cout << "\n";
     }    
@@ -105,20 +118,22 @@ int main(int argc, char* argv[]){
     for(int i = 0; i<plaintext.length() % n; i++){
         plaintext += 'x';
     }
-    cout << plaintext << '\n';
+
+    int lineWidth = 80;
+    cout << "\nPlaintext:\n";
+    printText(plaintext, lineWidth);
 
     // Encrypt the plaintext using the key and the hill cipher
-    string ciphertext = hillCipher(plaintext, keyMatrix);
-    cout << ciphertext << '\n';
+    string ciphertext;
+    try{
+        ciphertext = hillCipher(plaintext, keyMatrix);
+    } catch(string &err){
+        cerr << err << '\n';
+        return 1;
+    }
+    cout << "\nCiphertext:\n";
+    printText(ciphertext, lineWidth);
 
-    // Output the key using the required format
-    // Output the plaintext and ciphertext using the required format
-    // std::vector<std::vector<int>> m = {{1,1}, {2,2}};
-    // try{
-    //     multMatrix(m, m);
-    // } catch(std::string err){
-    //     std::cout << err << '\n';
-    // }
     return 0;
 }
 
