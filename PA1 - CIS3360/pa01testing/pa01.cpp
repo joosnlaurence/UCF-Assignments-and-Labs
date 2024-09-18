@@ -53,17 +53,17 @@ string hillCipher(const string &ptext, const vector<vector<int>> &key){
     int numBlocks = ptext.length()/key.size();
     int blocksize = key.size();
     string ciphertext = ""; 
-    vector<vector<int>> ptextChars(key.size(), vector<int>(1));
+    vector<vector<int>> ptextMatrix(key.size(), vector<int>(1));
 
     for(int i = 0; i<numBlocks; i++){
         string block = ptext.substr(i*blocksize, blocksize);
         for(int j = 0; j<block.size(); j++){
-            ptextChars[j][0] = block[j]-'a';
+            ptextMatrix[j][0] = block[j]-'a';
         }
 
         vector<vector<int>> cipherMatrix;
         try{
-            cipherMatrix = multMatrices(key, ptextChars);
+            cipherMatrix = multMatrices(key, ptextMatrix);
         } catch(string err){
             throw err;
         }
