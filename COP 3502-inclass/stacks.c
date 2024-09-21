@@ -13,7 +13,7 @@ stack* create_stack(int maxSize){
     stack* s = (stack*)malloc(sizeof(stack));
     s->maxSize = maxSize;
     s->top = -1;
-    s->stack = (char*)malloc(sizeof(char));
+    s->stack = (char*)malloc(sizeof(char)*maxSize);
 
     return s;
 }
@@ -22,15 +22,18 @@ int isempty(stack* s){
     return s->top == -1;
 }
 int isfull(stack* s){
-    return s->top == s->maxSize;
+    return s->top >= s->maxSize-1;
 }
 
-void push(stack* s, char ch){
+int push(stack* s, char ch){
     if(!isfull(s)){
         s->stack[++s->top] = ch;
+        return 1;
     }
-    else
+    else{
         printf("\nStack is full\n");
+        return 0;
+    }
 }
 char pop(stack* s){
     if(isempty(s)){
@@ -50,18 +53,18 @@ void display_stack(const stack* s){
     puts("");
 }
 
+void free_mem(stack* st){
+    free(st->stack);
+    free(st);
+}
+
 
 int main(){
     int max_size = 5;
-    stack* my_stack = create_stack(max_size);
+    
 
-    for(int i = 0; i<max_size; i++){
-        push(my_stack, 'a' + i);
-    }
-    display_stack(my_stack);
-    printf("Popping: %c\n", pop(my_stack));
-    printf("Popping: %c\n", pop(my_stack));
-    printf("Popping: %c\n", pop(my_stack));
-    display_stack(my_stack);
+    // for(int i = 0; i<10; i++){
+    //     free_mem(stackArr[i]);
+    // }
     return 0;
 }
