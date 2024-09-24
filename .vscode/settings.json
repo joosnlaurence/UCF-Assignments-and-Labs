@@ -2,5 +2,6 @@
     "cSpell.words": [
         "isfull",
         "Laureano"
-    ]
+    ],
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
 }
