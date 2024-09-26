@@ -100,7 +100,7 @@ void createReverseCircle(GarageQueue* gq){
 // the first node will point to the previous node (last node), the next node will point to 
 // this previous node, and so on. 
 void rearrangeCircle(GarageQueue* gq){
-    if(gq != NULL){
+    if(!isempty(gq)){
         Student* next = gq->front->next; // the next node to change pointer direction of
         Student* prev = gq->back; // the node one space behind the current node
         Student* curr = gq->front; // the current node to change the pointer direction
@@ -122,12 +122,12 @@ void rearrangeCircle(GarageQueue* gq){
 // display the sequence numbers of the students in the garage queue
 void display(const GarageQueue* gq){
     Student* temp = gq->front;
-    printf("%d ", gq->gNum);
+    printf("%d", gq->gNum);
     for(int i = 0; i<gq->nodeCount-1; i++){
-        printf("%d ", temp->sequenceNumber);
+        printf(" %d", temp->sequenceNumber);
         temp = temp->next;
     }
-    printf(temp == NULL ? "\n" : "%d\n", temp->sequenceNumber);
+    printf(isempty(gq) ? "\n" : " %d\n", temp->sequenceNumber);
 }
 
 // the first phase of eliminating students from the competition
@@ -182,7 +182,7 @@ void deleteHighestSeqStudent(GarageQueue** garages, int garageCount, int* garage
     GarageQueue* maxStuGarage;
     for(int i = 0; i<garageCount; i++){
         GarageQueue* currGarage = garages[garageNums[i]-1];
-        if(currGarage->nodeCount > 0){
+        if(!isempty(currGarage)){
             Student* currStu = peek(currGarage);
             if(maxSeq < currStu->sequenceNumber){
                 maxSeq = currStu->sequenceNumber;
@@ -213,15 +213,13 @@ void phaseTwoElimination(GarageQueue** garages, int garageCount){
     }
 
     for(int i = 0; i<garageCount; i++){
-        if(garages[gNums[i]-1]->nodeCount == 1){
-            GarageQueue* g = garages[gNums[i]-1];
+        GarageQueue* g = garages[gNums[i]-1];
+        if(!isempty(g)){
             printf("\nStudent %d from the group for garage %d is the winner!\n",
                     peek(g)->sequenceNumber, g->gNum);
             free(peek(g));
-            free(g);
         }
-        else
-            free(garages[gNums[i]-1]);
+        free(g);
     }
 
     free(gNums);
