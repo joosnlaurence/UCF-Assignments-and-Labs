@@ -21,6 +21,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#define MAX_LENGTH 100000
 using namespace std;
 
 // Multiplies two matrices 
@@ -53,17 +54,17 @@ string hillCipher(const string &ptext, const vector<vector<int>> &key){
     int numBlocks = ptext.length()/key.size();
     int blocksize = key.size();
     string ciphertext = ""; 
-    vector<vector<int>> ptextChars(key.size(), vector<int>(1));
+    vector<vector<int>> ptextMatrix(key.size(), vector<int>(1));
 
     for(int i = 0; i<numBlocks; i++){
         string block = ptext.substr(i*blocksize, blocksize);
         for(int j = 0; j<block.size(); j++){
-            ptextChars[j][0] = block[j]-'a';
+            ptextMatrix[j][0] = block[j]-'a';
         }
 
         vector<vector<int>> cipherMatrix;
         try{
-            cipherMatrix = multMatrices(key, ptextChars);
+            cipherMatrix = multMatrices(key, ptextMatrix);
         } catch(string err){
             throw err;
         }
@@ -112,18 +113,17 @@ int main(int argc, char* argv[]){
     }    
 
     // Run through the plaintext character by character to format its input
-    string plaintext = "";
+    string plaintext;
     char ch;
     while(ptextF.get(ch)){
         if(isalpha(ch)){
             plaintext += tolower(ch);
         }
     }    
-
-    // Pad the plaintext as with x's as necessary
+    // Pad the plaintext with x's as necessary
     for(int i = 0; i<plaintext.length() % n; i++){
         plaintext += 'x';
-    }
+    }     
 
     int lineWidth = 80;
     cout << "\nPlaintext:\n";

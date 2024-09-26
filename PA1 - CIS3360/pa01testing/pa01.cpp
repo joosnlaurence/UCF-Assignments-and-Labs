@@ -21,6 +21,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#define MAX_LENGTH 100000
 using namespace std;
 
 // Multiplies two matrices 
@@ -119,11 +120,11 @@ int main(int argc, char* argv[]){
             plaintext += tolower(ch);
         }
     }    
-
-    // Pad the plaintext as with x's as necessary
+    // Pad the plaintext with x's as necessary
     for(int i = 0; i<plaintext.length() % n; i++){
         plaintext += 'x';
-    }
+    }  
+     
 
     int lineWidth = 80;
     cout << "\nPlaintext:\n";
