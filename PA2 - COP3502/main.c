@@ -19,17 +19,20 @@ typedef struct GarageQueue{
 Student* createStudent(int sequence);
 void createReverseCircle(GarageQueue* gq);
 
+// return the front student in the queue
 Student* peek(const GarageQueue* gq){
     if(gq != NULL)
         return gq->front;
     return NULL;
 }
+// check if the queue is empty
 int isempty(const GarageQueue* gq){
     if(gq == NULL)
         return -1;
     return gq->nodeCount == 0;
 }
 
+// add a student with a given sequence number to the back of the queue
 void enqueue(GarageQueue* gq, int sequence){
     Student* st = createStudent(sequence);
 
@@ -44,17 +47,21 @@ void enqueue(GarageQueue* gq, int sequence){
     gq->back = st;
     gq->nodeCount++;
 }
-void dequeue(GarageQueue* gq){
+// removes and returns the student from the front of the queue
+Student* dequeue(GarageQueue* gq){
     if(!isempty(gq)){
         gq->nodeCount--;
         Student* dequeued = gq->front;
         gq->front = dequeued->next;
         gq->back->next = gq->front;
 
-        free(dequeued);
+        return dequeued;
+        //free(dequeued);
     }
+    return NULL;
 }
 
+// creates a new student with the given sequence number
 Student* createStudent(int sequence){
     Student* st = (Student*)malloc(sizeof(Student));
     st->sequenceNumber = sequence;
@@ -62,6 +69,9 @@ Student* createStudent(int sequence){
 
     return st;
 }
+// create a new garage with the 'nodeCount' number of students, 'th' threshold for the 
+// first round of elimination, 'gNum' for the garage number, and 'k' for the kth student
+// to eliminate 
 GarageQueue* createGarage(int nodeCount, int k, int th, int gNum){
     GarageQueue* gq = (GarageQueue*)malloc(sizeof(GarageQueue));
     gq->front = NULL;
@@ -71,11 +81,13 @@ GarageQueue* createGarage(int nodeCount, int k, int th, int gNum){
     gq->gNum = gNum;
 
     gq->nodeCount = nodeCount;
+    // initialize the queue in the garage
     createReverseCircle(gq);    
 
     return gq;
 }
 
+// enqueue students into a circular linked list queue in descending order
 void createReverseCircle(GarageQueue* gq){
     int n = gq->nodeCount;
     gq->nodeCount = 0;
@@ -83,63 +95,71 @@ void createReverseCircle(GarageQueue* gq){
         enqueue(gq, i+1);
     }
 }
+// reverses the order of the circular queue.
+// essentially reverses the direction that the pointers are pointing.
+// the first node will point to the previous node (last node), the next node will point to 
+// this previous node, and so on. 
 void rearrangeCircle(GarageQueue* gq){
-    if(gq != NULL){
-        Student* next = gq->front->next;
-        Student* prev = gq->back;
-        Student* curr = gq->front;
+    if(!isempty(gq)){
+        Student* next = gq->front->next; // the next node to change pointer direction of
+        Student* prev = gq->back; // the node one space behind the current node
+        Student* curr = gq->front; // the current node to change the pointer direction
 
+        // reverse the order of the front and back pointer in the queue
         gq->front = gq->back;
         gq->back = curr;
 
+        // if curr->next points to the previous node, then we must be back at the 
+        // previously first (now last) node
         while(curr->next != prev){
-            curr->next = prev;
+            curr->next = prev; // reverse direction of curr->next pointer
             prev = curr;
             curr = next;
             next = next->next;
         }
     }
 }
+// display the sequence numbers of the students in the garage queue
 void display(const GarageQueue* gq){
     Student* temp = gq->front;
-    printf("%d ", gq->gNum);
-    if(temp != NULL){
-        do{
-            printf("%d ", temp->sequenceNumber);
-            temp = temp->next;
-        }while(temp != NULL && temp->next != gq->front);
+    printf("%d", gq->gNum);
+    for(int i = 0; i<gq->nodeCount-1; i++){
+        printf(" %d", temp->sequenceNumber);
+        temp = temp->next;
     }
-    printf("%d\n", temp->sequenceNumber);
+    printf(isempty(gq) ? "\n" : " %d\n", temp->sequenceNumber);
 }
 
+// the first phase of eliminating students from the competition
+// skips pasts k-1 students and then eliminates the kth student from the 
+// competition. repeats this until the number of students is equals to the 
+// threshold 'th'
 void phaseOneElimination(GarageQueue* gq){
-    Student* temp = gq->back;
+    Student* km1Stu = gq->back; // the kth - 1 student
 
     while(gq->nodeCount > gq->th){
         for(int i = 0; i<gq->k-1; i++){
-            temp = temp->next;
+            km1Stu = km1Stu->next;
         }
-        Student* t = temp->next;
-        int seq = t->sequenceNumber;
-        if(t == gq->front){
+        
+        Student* kthStu = km1Stu->next;
+        int seq = kthStu->sequenceNumber;
+        if(kthStu == gq->front){
             gq->front = gq->front->next;
-            free(t);
-            gq->back->next = gq->front;
         }
-        else if(t == gq->back){
-            gq->back = temp;
-            free(t);
-            gq->back->next = gq->front;
+        else if(kthStu == gq->back){
+            gq->back = km1Stu;
         }
-        else{
-            temp->next = temp->next->next;
-            free(t);
-        }
+
+        km1Stu->next = km1Stu->next->next;
+        free(kthStu);
         gq->nodeCount--;
         printf("Student# %d eliminated\n", seq);
     }
 }
 
+// returns a pointer to an array of the garage numbers of the nonempty garages.
+// the garage numbers should correspond to their index + 1
 int* getNonemptyGNums(GarageQueue** garages, int garageCount){
     int* gNums = (int*)malloc(sizeof(int)*garageCount);
     int gIndex = 0;
@@ -153,64 +173,64 @@ int* getNonemptyGNums(GarageQueue** garages, int garageCount){
     return gNums;
 }
 
-void deleteHighestSeqStudent(GarageQueue** garages, int garageCount){
-    int* gNums = getNonemptyGNums(garages, garageCount);
-    
+// removes the student with the highest sequence in all of the garages
+// 'garages' is the pointer to an array of garage queues 
+// 'garageCount' is the total number of nonempty garages 
+// 'garageNums' is an array of the indices + 1 for the garages, assuming that the garage numbers are in ascending order
+void deleteHighestSeqStudent(GarageQueue** garages, int garageCount, int* garageNums){    
     int maxSeq = -1;
     GarageQueue* maxStuGarage;
-    Student* maxStu;
     for(int i = 0; i<garageCount; i++){
-        GarageQueue* currGarage = garages[gNums[i]-1];
-        if(currGarage->nodeCount > 0){
+        GarageQueue* currGarage = garages[garageNums[i]-1];
+        if(!isempty(currGarage)){
             Student* currStu = peek(currGarage);
             if(maxSeq < currStu->sequenceNumber){
                 maxSeq = currStu->sequenceNumber;
-                maxStu = currStu;
                 maxStuGarage = currGarage;
             }
             else if(maxSeq == currStu->sequenceNumber && maxStuGarage->gNum > currGarage->gNum){
                 maxStuGarage = currGarage;
-                maxStu = currStu;
             }
         }
     }
     printf("Eliminated student %d from group for garage %d\n", maxSeq, maxStuGarage->gNum);
-    dequeue(maxStuGarage);
-
-    free(gNums);
+    free(dequeue(maxStuGarage)); 
 }
 
+// phase two eliminates the student with the highest sequence number among all of the
+// garages, continuing until one student, the winner, remains
 void phaseTwoElimination(GarageQueue** garages, int garageCount){
-    int stuCount = 0;
+    int stuCount = 0; // total number of students in all of the garages
     for(int i = 0; i<MAX_GARAGES; i++){
         if(garages[i] != NULL)
             stuCount += garages[i]->nodeCount;
     }
     
+    int* gNums = getNonemptyGNums(garages, garageCount);
     while(stuCount > 1){
-        deleteHighestSeqStudent(garages, garageCount);
+        deleteHighestSeqStudent(garages, garageCount, gNums);
         stuCount--;
     }
 
-    for(int i = 0; i<MAX_GARAGES; i++){
-        if(garages[i] != NULL && garages[i]->nodeCount == 1){
-            GarageQueue* g = garages[i];
+    for(int i = 0; i<garageCount; i++){
+        GarageQueue* g = garages[gNums[i]-1];
+        if(!isempty(g)){
             printf("\nStudent %d from the group for garage %d is the winner!\n",
                     peek(g)->sequenceNumber, g->gNum);
             free(peek(g));
-            free(g);
         }
-        else
-            free(garages[i]);
+        free(g);
     }
+
+    free(gNums);
 }
 
 int main(){
     int garageCount;
     scanf("%d", &garageCount);
     GarageQueue* garages[MAX_GARAGES];
-
     
+    // initialize the garage queues
     for(int i = 0; i<MAX_GARAGES; i++)
         garages[i] = NULL;
     for(int i = 0; i<garageCount; i++){

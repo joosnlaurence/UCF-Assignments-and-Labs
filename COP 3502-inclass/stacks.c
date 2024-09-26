@@ -47,6 +47,7 @@ char peek(const stack* s){
 }
 
 void display_stack(const stack* s){
+    printf("Stack: ");
     for(int i = 0; i < s->top+1; i++){
         printf("%c ", s->stack[i]);
     }
@@ -60,11 +61,52 @@ void free_mem(stack* st){
 
 
 int main(){
-    int max_size = 5;
-    
+    printf("Enter the max size of the stack you want to create: ");
+    int maxSize;
+    scanf("%d", &maxSize);
+    printf("Creating a stack with max size of %d...\n\n", maxSize);
+    stack* st = create_stack(maxSize);
 
-    // for(int i = 0; i<10; i++){
-    //     free_mem(stackArr[i]);
-    // }
+    while(1){
+        int ch;
+        printf("0. exit 1. push 2. pop 3. isfull? 4. isempty? 5. peek 6. display: ");
+        scanf(" %d", &ch);
+        switch(ch){
+            case 0:
+                printf("Exiting...\n");
+                return 0;
+                break;
+            case 1: 
+                char ele;
+                printf("Enter character to push: ");
+                scanf(" %c", &ele);
+                push(st, ele);
+                display_stack(st);
+                break;
+            case 2:
+                char c = pop(st);
+                if(c)
+                    printf("Popping %c...\n", c);
+                display_stack(st);
+                break;
+            case 3:
+                printf(isfull(st) ? "True\n" : "False\n");
+                break;
+            case 4:
+                printf(isempty(st) ? "True\n" : "False\n");
+                break;
+            case 5:
+                printf("Top char on stack is %c\n", peek(st));
+                break;
+            case 6:
+                display_stack(st);
+                break;
+            default:
+                printf("Invalid option...\n");
+                break;                
+        }
+    }
+
+    free_mem(st);
     return 0;
 }
