@@ -4,18 +4,17 @@
 #include <ctype.h>
 #define MAX_PTEXT_LENGTH 10000
 
-int** multMatrices(int m1rows, int m1cols, int m1[m1rows][m1cols], 
-                  int m2rows, int m2cols, int m2[m2rows][m2cols]) {
+void multMatrices(int m1rows, int m1cols, int m1[m1rows][m1cols], 
+                  int m2rows, int m2cols, int m2[m2rows][m2cols],
+                  int result[m1rows][m2cols]) {
     // Ensure that the number of columns of A matches the number of rows of B
     if (m1cols != m2rows) {
         perror("Error: Incompatible matrix dimensions\n");
-        return NULL;
+        return;
     }
 
-    int** result = (int**)malloc(sizeof(int*)*m1rows);
     // Perform matrix multiplication
     for (int i = 0; i < m1rows; i++) {
-        result[i] = (int*)malloc(sizeof(int)*m2cols);
         for (int j = 0; j < m2cols; j++) {
             result[i][j] = 0;
             for (int k = 0; k < m1cols; k++) {
@@ -23,8 +22,6 @@ int** multMatrices(int m1rows, int m1cols, int m1[m1rows][m1cols],
             }
         }
     }
-
-    return result;
 }
 
 char* hillCipher(const char* ptext, int keysize, int key[][keysize]){
@@ -44,14 +41,13 @@ char* hillCipher(const char* ptext, int keysize, int key[][keysize]){
         for(int j = 0; j<blockWidth; j++)
             ptextMatrix[j][0] = block[j] - 'a';
         
-        int** cipherMatrix = multMatrices(keysize, keysize, key, blockWidth, 1, ptextMatrix);
+        int cipherMatrix[blockWidth][1];
+        multMatrices(keysize, keysize, key, blockWidth, 1, ptextMatrix, cipherMatrix);
 
         for(int k = 0; k < keysize; k++){
             int currCh = blockWidth*i + k;
             ciphertext[currCh] = (char)(cipherMatrix[k][0] % 26 + 'a');
-            free(cipherMatrix[k]);
         }   
-        free(cipherMatrix);
     }
     ciphertext[blockWidth * numBlocks] = '\0'; 
     return ciphertext;
@@ -80,12 +76,10 @@ int main(int argc, char* argv[]){
 
     int n;
     fscanf(keyF, "%d", &n);
-    //int** keyMatrix = (int**)malloc(sizeof(int*) * n);
     int keyMatrix[n][n];
 
     printf("\nKey matrix:\n");
     for(int i = 0; i<n; i++){
-        //keyMatrix[i] = (int*)malloc(sizeof(int) * n);
         for(int j = 0; j<n; j++){
             fscanf(keyF, "%d", &keyMatrix[i][j]);
             printf("%4d", keyMatrix[i][j]);
@@ -111,7 +105,6 @@ int main(int argc, char* argv[]){
     printf("\nPlaintext:\n");
     printText(plaintext, lineWidth);
 
-    //char ciphertext[strlen(plaintext)+1];
     char* ciphertext = hillCipher(plaintext, n, keyMatrix);
     printf("\nCiphertext:\n");
     printText(ciphertext, lineWidth);

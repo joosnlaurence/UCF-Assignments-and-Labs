@@ -1,21 +1,3 @@
-/*============================================================================
-| Assignment: pa01 - Encrypting a plaintext file using the Hill cipher
-|
-| Author: Jason Laureano
-| Language: c
-| To Compile: gcc -o pa01 pa01.cpp
-| To Execute: c -> ./pa01 kX.txt pX.txt
-| where kX.txt is the keytext file
-| and pX.txt is plaintext file
-| Note:
-| All input files are simple 8 bit ASCII input
-| All execute commands above have been tested on Eustis
-|
-| Class: CIS3360 - Security in Computing - Fall 2024
-| Instructor: McAlpin
-| Due Date: 9/29
-+===========================================================================*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -123,6 +105,7 @@ int main(int argc, char* argv[]){
     printf("\nPlaintext:\n");
     printText(plaintext, lineWidth);
 
+    //char ciphertext[strlen(plaintext)+1];
     char* ciphertext = hillCipher(plaintext, n, keyMatrix);
     printf("\nCiphertext:\n");
     printText(ciphertext, lineWidth);
@@ -133,12 +116,3 @@ int main(int argc, char* argv[]){
 
     return 0;
 }
-
-/*=============================================================================
-| I Jason Laureano (ja193947) affirm that this program is
-| entirely my own work and that I have neither developed my code together with
-| any another person, nor copied any code from any other person, nor permitted
-| my code to be copied or otherwise used by any other person, nor have I
-| copied, modified, or otherwise used programs created by others. I acknowledge
-| that any violation of the above terms will be treated as academic dishonesty.
-+=============================================================================*/
