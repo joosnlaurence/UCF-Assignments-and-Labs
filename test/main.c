@@ -1,8 +1,9 @@
 #include <stdio.h>
 
 int main(){
-    printf("Hello world\n");
-    printf("This is a test\n");
-
+    for(int i = 0; i<128; i++){
+        printf("%d %c,\t", i, (char)i);
+    }
+    puts("");
     return 0;
 }

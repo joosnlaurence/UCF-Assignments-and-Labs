@@ -3,5 +3,8 @@
         "isfull",
         "Laureano"
     ],
-    "C_Cpp.default.compilerPath": "/usr/bin/gcc"
+    "C_Cpp.default.compilerPath": "/usr/bin/gcc",
+    "files.associations": {
+        "algorithm": "c"
+    }
 }
