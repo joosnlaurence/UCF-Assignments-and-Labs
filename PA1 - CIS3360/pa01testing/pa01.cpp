@@ -21,7 +21,6 @@
 #include <string>
 #include <vector>
 #include <iomanip>
-#define MAX_LENGTH 100000
 using namespace std;
 
 // Multiplies two matrices 
@@ -41,7 +40,7 @@ vector<vector<int>> multMatrices(const vector<vector<int>> &m1, const vector<vec
             }
         }
     }
-
+    
     return c;
 }  
 
@@ -51,25 +50,20 @@ string hillCipher(const string &ptext, const vector<vector<int>> &key){
     else if(key.size() != key[0].size())
         throw "Error: Key matrix is not square";
     
-    int numBlocks = ptext.length()/key.size();
+    int numBlocks = ptext.length() / key.size();
     int blocksize = key.size();
     string ciphertext = ""; 
-    vector<vector<int>> ptextMatrix(key.size(), vector<int>(1));
+    vector<vector<int>> ptextMatrix(blocksize, vector<int>(1));
 
     for(int i = 0; i<numBlocks; i++){
         string block = ptext.substr(i*blocksize, blocksize);
-        for(int j = 0; j<block.size(); j++){
+        for(int j = 0; j<blocksize; j++){
             ptextMatrix[j][0] = block[j]-'a';
         }
 
-        vector<vector<int>> cipherMatrix;
-        try{
-            cipherMatrix = multMatrices(key, ptextMatrix);
-        } catch(string err){
-            throw err;
-        }
+        vector<vector<int>> cipherMatrix = multMatrices(key, ptextMatrix);
         for(int k = 0; k<cipherMatrix.size(); k++){
-            ciphertext += (char)(cipherMatrix[k][0] % 26 + 'a');
+            ciphertext += static_cast<char>(cipherMatrix[k][0] % 26 + 'a');
         }
     }
     return ciphertext;
@@ -121,10 +115,12 @@ int main(int argc, char* argv[]){
         }
     }    
     // Pad the plaintext with x's as necessary
-    for(int i = 0; i<plaintext.length() % n; i++){
+    while(plaintext.length() % n != 0){
         plaintext += 'x';
-    }  
-     
+    }
+
+    keyF.close();
+    ptextF.close();     
 
     int lineWidth = 80;
     cout << "\nPlaintext:\n";
