@@ -15,6 +15,7 @@ float findDistance(int x1, int x2, int y1, int y2){
     return sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2));
 }
 
+// Memoization
 void initDistMatrix(int numGarages, int points[][2], float distMatrix[2*MAX_EXPRESSWAYS][2*MAX_EXPRESSWAYS]){
     for(int i = 0; i<numGarages; i++){
         for(int j = i+1; j<numGarages; j++){
@@ -25,25 +26,20 @@ void initDistMatrix(int numGarages, int points[][2], float distMatrix[2*MAX_EXPR
     }
 }
 
-float findMinSumOfDist(int* perm, int* used, int k, int numGarages, int points[][2],
-                       float distMatrix[2*MAX_EXPRESSWAYS][2*MAX_EXPRESSWAYS], 
-                       float minSum, float currSum){
-    // static float distMatrix[2*MAX_EXPRESSWAYS][2*MAX_EXPRESSWAYS];
-    // static int distInit = 0;
-    
-    if(currSum >= minSum && minSum != -1)
-        return minSum;
+// Combines memoization, permutation pairing, and pruning of the recursion tree
+float findMinSumOfDist(int k, int numGarages, int used[], int points[][2]){
+    static float distMatrix[2*MAX_EXPRESSWAYS][2*MAX_EXPRESSWAYS];
+    static int distInit = 0;
+    static int currentPairs[2*MAX_EXPRESSWAYS];
+    static float minSum = -1;
+    static float currSum = 0;
 
     // base case: if k == number of garages, return the distance between the two
     if(k >= numGarages){
-        // if(!distInit){
-        //     initDistMatrix(numGarages, points, distMatrix);
-        //     distInit = 1;
-        // }
-        if(minSum == -1 || currSum < minSum){
+        if(currSum < minSum || minSum == -1){
             minSum = currSum;
-            for(int k = 0; k<numGarages; k++){
-                    finalPermutation[k] = perm[k];
+            for (int i = 0; i < numGarages; i++) {
+                finalPermutation[i] = currentPairs[i];
             }
         }
         return minSum;
@@ -51,26 +47,33 @@ float findMinSumOfDist(int* perm, int* used, int k, int numGarages, int points[]
     for(int i = 0; i<numGarages; i++){
         if(!used[i]){
             used[i] = 1;
-            perm[k] = i;
-            
-            if(k % 2 == 1)
-                currSum += distMatrix[perm[k-1]][perm[k]];
+            for(int j = i+1; j<numGarages; j++){
+                if(!used[j]){
+                    used[j] = 1;
+                    currentPairs[k] = i;
+                    currentPairs[k+1] = j;
 
-            minSum = findMinSumOfDist(perm, used, k+1, numGarages, points, distMatrix, minSum, currSum);
+                    if(!distInit){
+                        distInit = 1;
+                        initDistMatrix(numGarages, points, distMatrix);
+                    }
 
+                    float pairDist = distMatrix[i][j];
+                    if(minSum == -1 || currSum + pairDist < minSum){
+                        currSum += pairDist;
+                        minSum = findMinSumOfDist(k+2, numGarages, used, points);
+                    }
+
+                    used[j] = 0;
+                }
+            }
             used[i] = 0;
-
-            if (k % 2 == 1)
-                currSum -= distMatrix[perm[k-1]][perm[k]];
         }
     }
     return minSum;
 }   
 
-void printMinGaragePairs(int numGarages, int points[numGarages][2]){
-    // for the length of the finalPermutation arr; i+= 2
-    //      print g[i], g[i+1], distance
-    //      
+void printMinGaragePairs(int numGarages, int points[numGarages][2]){    
     for(int i = 0; i<numGarages; i+=2){
         // int g = finalPermutation[i];
         // int gp1 = finalPermutation[i+1];
@@ -97,7 +100,6 @@ int main(){
     if(n >= 0){
         garages = (char**)malloc(sizeof(char*) * numGarages);
         int points[numGarages][2]; // [k,0] == xi; [k,1] == yi
-        int perm[numGarages]; // Hold the current permutation
         int used[numGarages]; // Track which indexes are fixed
 
         for(int i = 0; i<numGarages; i++){
@@ -107,13 +109,10 @@ int main(){
             garages[i] = (char*)malloc(sizeof(char) * (strlen(gname) + 1));
             strcpy(garages[i], gname);
             
-            perm[i] = 0;
             used[i] = 0;
         }
-        float distMatrix[2*MAX_EXPRESSWAYS][2*MAX_EXPRESSWAYS];
-        initDistMatrix(numGarages, points, distMatrix);
 
-        float minSum = findMinSumOfDist(perm, used, 0, numGarages, points, distMatrix, -1, 0);
+        float minSum = findMinSumOfDist(0, numGarages, used, points);
         printf("%.3f\n", minSum);
         printMinGaragePairs(numGarages, points);
         free_mem(numGarages);
