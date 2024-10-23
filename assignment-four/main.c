@@ -35,6 +35,11 @@ int compareTo(coords* ptrPt1, coords* ptrPt2){
 
 void binSearch();
 
+void merge();
+void mergesort(coords* coords, int l, int r, int t);
+
+void insertion_sort(coords* coords, int l, int r);
+
 void wrapper(coords* gCoords, int n, int threshold);
 
 int main(){
