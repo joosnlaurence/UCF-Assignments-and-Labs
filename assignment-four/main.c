@@ -1,3 +1,7 @@
+/* COP 3502C: Assignment 4
+   This program was created by Jason Laureano
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,7 +10,7 @@
 
 typedef struct coords{
     int x, y;
-    float distToPerson;
+    int distToPerson;
 }coords;
 
 coords personCoords;
@@ -19,8 +23,10 @@ coords personCoords;
 
 /* Slightly optimized calculation for distance that removes the need for math.h
     Comparing the squared euclidean distances is enough for searching and sorting
+    Also switched to int return type for better precision
+    Max value is 20,000^2 + 20,000^2, which is < 2 billion, so no need for long
 */
-float calcDist(int x, int y){
+int calcDist(int x, int y){
     return (x - personCoords.x)*(x - personCoords.x) + 
            (y - personCoords.y)*(y - personCoords.y);
 }
@@ -52,8 +58,8 @@ int compareTo(coords* ptrPt1, coords* ptrPt2){
     if(x1 == x2 && y1 == y2) // if same points
         return 0;
 
-    float distPt1 = ptrPt1->distToPerson;
-    float distPt2 = ptrPt2->distToPerson;
+    int distPt1 = ptrPt1->distToPerson;
+    int distPt2 = ptrPt2->distToPerson;
 
     if(distPt1 < distPt2)
         return CLOSER;
@@ -171,7 +177,7 @@ void sort(coords* gCoords, int n, int threshold){
 /* Prints coords to console in the format: xi, yi*/
 void print_coords(coords* c, int n){
     for(int i = 0; i < n; i++){
-        printf("%d %d\n", c[i].x, c[i].y);
+        printf("%d %d %d\n", c[i].x, c[i].y, c[i].distToPerson);
     }
 }
 
