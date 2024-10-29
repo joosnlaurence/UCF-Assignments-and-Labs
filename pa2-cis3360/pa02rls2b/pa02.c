@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+
+unsigned long convert_to_unsigned_binary(char* string, int bit_size){
+    unsigned long result = 0;
+    int exp = bit_size - 8;
+    int blockSize = bit_size/8;
+    for(int i = 0; i<blockSize; i++){
+        result += (unsigned long)string[i] << exp;
+        exp -= 8;
+    }
+
+    return result;
+}
+
+unsigned long byte_wide_checksum(char* string, int bit_size){
+    int byteSize = bit_size/8;
+    unsigned long mod = 1UL << bit_size;
+    unsigned long checksum = 0;
+    char block[byteSize];
+    for(int i = 0; i<strlen(string); i += byteSize){
+        for(int k = 0; k<byteSize; k++)
+            block[k] = string[i+k];
+        unsigned long blockSum = convert_to_unsigned_binary(block, bit_size);
+        checksum = (checksum + blockSum) % mod;
+    }
+
+    return checksum;
+}
+
+char* readFile(FILE* f, int blockSize){
+    int textSize = 0;
+    while(fgetc(f) != EOF)
+        textSize++;
+    int padSize = (blockSize - textSize % blockSize) % blockSize;
+    //printf("%d\n", padSize);
+
+    char* text = (char*)malloc(textSize + padSize + 1);
+    fseek(f, 0, SEEK_SET);
+    fread(text, sizeof(char), textSize, f);
+    while(padSize > 0){
+        padSize--;
+        text[textSize++] = 'X';
+    }
+    text[textSize] = '\0';
+
+    return text;
+}
+
+int main(int argc, char* argv[]){
+    if(argc != 3){
+        fprintf(stderr, "Invalid number of arguments\n");
+        return 1;
+    }
+    
+    FILE* inFile = fopen(argv[1], "r");
+    if(inFile == NULL){
+        fprintf(stderr, "File not found\n");
+        return 1;
+    }
+
+    int bitSize = atoi(argv[2]);
+    if(bitSize != 8 && bitSize != 16 && bitSize != 32){
+        fprintf(stderr, "Valid checksum sizes are 8, 16, or 32\n");
+        return 1;
+    }
+    int byteSize = bitSize / 8;
+
+    char* text = readFile(inFile, byteSize);
+    int len = strlen(text);
+
+    unsigned long checksum = byte_wide_checksum(text, bitSize);
+    
+    for(int i = 0; i<len; i++){
+        if(i%80 == 0)
+            printf("\n");
+        printf("%c", text[i]);
+    }
+    printf("\n%2d bit checksum is %8lx for all %4d chars\n",
+             bitSize, checksum, len);
+
+    fclose(inFile);
+    free(text);
+
+    return 0;
+}
