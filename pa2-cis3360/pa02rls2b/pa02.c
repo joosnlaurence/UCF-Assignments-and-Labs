@@ -31,14 +31,13 @@ unsigned long byte_wide_checksum(char* string, int bit_size){
 }
 
 char* readFile(FILE* f, int blockSize){
-    int textSize = 0;
-    while(fgetc(f) != EOF)
-        textSize++;
+    fseek(f, 0, SEEK_END);
+    int textSize = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
     int padSize = (blockSize - textSize % blockSize) % blockSize;
-    //printf("%d\n", padSize);
 
     char* text = (char*)malloc(textSize + padSize + 1);
-    fseek(f, 0, SEEK_SET);
     fread(text, sizeof(char), textSize, f);
     while(padSize > 0){
         padSize--;
