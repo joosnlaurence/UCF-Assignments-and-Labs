@@ -173,21 +173,117 @@ tree_node* parent(tree_node* root, tree_node* node){
     
     return NULL;
 }
+tree_node* minVal(tree_node* root){
+    if(root == NULL) return NULL;
 
+    if(root->left != NULL)
+        return minVal(root->left);
+    else 
+        return root;
+}
+tree_node* maxVal(tree_node* root){
+    if(root == NULL) return NULL;
+
+    if(root->right != NULL)
+        return maxVal(root->right);
+    else
+        return root;
+}
+int isLeaf(tree_node* node){
+    return node->left == NULL && node->right == NULL;
+}
+int hasOnlyLeftChild(tree_node* node){
+    return node->left != NULL && node->right == NULL;
+}
+int hasOnlyRightChild(tree_node* node){
+    return node->right != NULL && node->left == NULL;
+}
+tree_node* delete(tree_node* root, int val){
+    tree_node *delnode, *new_delnode, *save_node;
+    tree_node* p; // Parent of delnode
+    int save_val;
+
+    delnode = findNode(root, val);
+    if(delnode == NULL) return NULL;
+    p = parent(root, delnode);
+
+    if(isLeaf(delnode)){
+        if(p == NULL){
+            free(delnode);
+            return NULL;
+        }
+        else if(val < p->data)
+            p->left = NULL;
+        else
+            p->right = NULL;
+        free(delnode);
+
+        return root;
+    }
+    else if(hasOnlyLeftChild(delnode)){
+        if(p == NULL){
+            save_node = delnode->left;
+            free(delnode);
+            return save_node;
+        }
+        else if(val < p->data){
+            p->left = p->left->left;
+        }
+        else{
+            p->right = p->right->left;
+        }
+        free(delnode);
+        return root;
+    }
+    else if(hasOnlyRightChild(delnode)){
+        if(p == NULL){
+            save_node = delnode->right;
+            free(delnode);
+            return save_node;
+        }
+        else if(val < p->data){
+            p->left = p->left->right;
+        }
+        else{
+            p->right = p->right->right;
+        }
+        free(delnode);
+        return root;
+    }
+
+    new_delnode = minVal(delnode->right);
+    save_val = new_delnode->data;
+
+    delete(root, save_val);
+
+    delnode->data = save_val;
+
+    return root;
+}
 
 int main(){
-    srand(time(NULL));
+    // srand(time(NULL));
 
     tree_node* root = NULL;
     int size = MAX_SIZE;
     int items[size];
     int s = 0;
-    for(int i = 0; i<size; i++){
-        items[i] = rand() % (size*10);
+    for(int i = 0; i<size; i++){ 
+        items[i] = rand() % (size*100);
         s += items[i];
         root = insert_bst(root, items[i]);
         // printf("%d ", items[i]);
         // root = insert_bst(root, i+1);
+    }
+    printf("\n");
+    print_inorder(root);
+    printf("\n");
+
+    for(int i = 0; i<size; i++){
+        root = delete(root, items[i]);
+        printf("\n");
+        print_inorder(root);
+        printf("\n");
     }
     printf("\n");
     print_inorder(root);
