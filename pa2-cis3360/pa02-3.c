@@ -1,44 +1,52 @@
+/*  Academic Integrity statement - “I Jason Laureano (ja193947) affirm that
+    this program is entirely my own work and that I have neither developed my code with any
+    another person, nor copied any code from any other person, nor permitted my code to be copied
+    or otherwise used by any other person, nor have I copied, modified, or otherwise used programs
+    created by others. I acknowledge that any violation of the above terms will be treated as
+    academic dishonesty.”
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 
-unsigned long convert_to_unsigned_binary(char* string, int bit_size){
-    unsigned long result = 0;
-    int exp = bit_size - 8;
+unsigned int convert_to_unsigned_binary(char* string, int bit_size){
+    unsigned int result = 0;
+    int shamt = 8;
     int blockSize = bit_size/8;
     for(int i = 0; i<blockSize; i++){
-        result += (unsigned long)string[i] << exp;
-        exp -= 8;
+        result = result << shamt;
+        result += (unsigned int)string[i];
     }
 
     return result;
 }
 
-unsigned long byte_wide_checksum(char* string, int bit_size){
+unsigned int byte_wide_checksum(char* string, int bit_size){
     int byteSize = bit_size/8;
-    unsigned long mod = 1UL << bit_size;
-    unsigned long checksum = 0;
+    unsigned int bitmask = 1UL << bit_size - 1;
+    unsigned int checksum = 0;
     char block[byteSize];
     for(int i = 0; i<strlen(string); i += byteSize){
         for(int k = 0; k<byteSize; k++)
             block[k] = string[i+k];
-        unsigned long blockSum = convert_to_unsigned_binary(block, bit_size);
-        checksum = (checksum + blockSum) % mod;
+        unsigned int blockSum = convert_to_unsigned_binary(block, bit_size);
+        checksum += blockSum;
+        checksum &= bitmask;
     }
 
     return checksum;
 }
 
 char* readFile(FILE* f, int blockSize){
-    int textSize = 0;
-    while(fgetc(f) != EOF)
-        textSize++;
-    int padSize = (blockSize - textSize % blockSize) % blockSize;
-    //printf("%d\n", padSize);
+    fseek(f,0,SEEK_END);
+    int textSize = ftell(f);
+    fseek(f, 0, SEEK_SET);
+
+    int padSize = (blockSize - (textSize % blockSize)) % blockSize;
 
     char* text = (char*)malloc(textSize + padSize + 1);
-    fseek(f, 0, SEEK_SET);
     fread(text, sizeof(char), textSize, f);
     while(padSize > 0){
         padSize--;
@@ -73,12 +81,10 @@ int main(int argc, char* argv[]){
 
     unsigned long checksum = byte_wide_checksum(text, bitSize);
     
-    for(int i = 0; i<len; i++){
-        if(i%80 == 0)
-            printf("\n");
-        printf("%c", text[i]);
+    for(int i = 0; i<len; i+=80){
+        printf("\n%.80s", text + i);
     }
-    printf("\n%2d bit checksum is %8lx for all %4d chars\n",
+    printf("\n%2d bit checksum is %8x for all %4d chars\n",
              bitSize, checksum, len);
 
     fclose(inFile);
