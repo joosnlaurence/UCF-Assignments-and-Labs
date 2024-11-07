@@ -1,6 +1,15 @@
+/*  Academic Integrity statement - “I Jason Laureano (ja193947) affirm that
+    this program is entirely my own work and that I have neither developed my code with any
+    another person, nor copied any code from any other person, nor permitted my code to be copied
+    or otherwise used by any other person, nor have I copied, modified, or otherwise used programs
+    created by others. I acknowledge that any violation of the above terms will be treated as
+    academic dishonesty.”
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 unsigned int convert_to_unsigned_binary(char* string, int bit_size){
     unsigned int result = 0;
@@ -16,16 +25,15 @@ unsigned int convert_to_unsigned_binary(char* string, int bit_size){
 
 unsigned int byte_wide_checksum(char* string, int bit_size){
     int byteSize = bit_size/8;
-    unsigned int bitmask = 1UL << bit_size -1;
+    unsigned int bitmask = 1UL << bit_size - 1;
     unsigned int checksum = 0;
     char block[byteSize];
     for(int i = 0; i<strlen(string); i += byteSize){
         for(int k = 0; k<byteSize; k++)
             block[k] = string[i+k];
         unsigned int blockSum = convert_to_unsigned_binary(block, bit_size);
-        // checksum = (checksum + blockSum) % mod;
         checksum += blockSum;
-        checksum &= bitmask; 
+        checksum &= bitmask;
     }
 
     return checksum;
@@ -71,12 +79,10 @@ int main(int argc, char* argv[]){
     char* text = readFile(inFile, byteSize);
     int len = strlen(text);
 
-    unsigned int checksum = byte_wide_checksum(text, bitSize);
+    unsigned long checksum = byte_wide_checksum(text, bitSize);
     
-    for(int i = 0; i<len; i++){
-        if(i%80 == 0)
-            printf("\n");
-        printf("%c", text[i]);
+    for(int i = 0; i<len; i+=80){
+        printf("\n%.80s", text + i);
     }
     printf("\n%2d bit checksum is %8x for all %4d chars\n",
              bitSize, checksum, len);

@@ -169,7 +169,7 @@ long timediff(clock_t t1, clock_t t2){
 int main(){
     srand(time(NULL));
     // Different sizes to test the sort.
-    int sizes[NUMARRAYS] = {10000, 20000, 30000, 40000, 50000, 60000};
+    int sizes[NUMARRAYS] = {100000, 200000, 300000, 400000, 500000, 600000};
 
     int* originalArray; //to keep the original array unchanged so that we can use it for various algorithms.
     int* sortedArray; //We will mainly pass this one to all the function.
@@ -185,44 +185,44 @@ int main(){
 
         randArray(originalArray, sizes[i], MAXVAL);
 
-        arrayCopy(originalArray, sortedArray, sizes[i]);
-        start = clock();
-        bubble_sort(sortedArray, sizes[i]);
-        end = clock();
-        long elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Bubble sort.\n", sizes[i], elapsed);
+        // arrayCopy(originalArray, sortedArray, sizes[i]);
+        // start = clock();
+        // bubble_sort(sortedArray, sizes[i]);
+        // end = clock();
+        // long elapsed = timediff(start, end);
+        // printf("Sorting %d values took %ld ms for Bubble sort.\n", sizes[i], elapsed);
 
-        //the sorted array got sorted. So, we are copying the data from original array to sorted array again
-        arrayCopy(originalArray, sortedArray, sizes[i]);
-        start = clock();
-        insertion_sort_full(sortedArray, sizes[i]);
-        end = clock();
-        elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Insertion sort.\n", sizes[i], elapsed);
+        // //the sorted array got sorted. So, we are copying the data from original array to sorted array again
+        // arrayCopy(originalArray, sortedArray, sizes[i]);
+        // start = clock();
+        // insertion_sort_full(sortedArray, sizes[i]);
+        // end = clock();
+        // elapsed = timediff(start, end);
+        // printf("Sorting %d values took %ld ms for Insertion sort.\n", sizes[i], elapsed);
 
-        // Repeat for selection_sort
-        arrayCopy(originalArray, sortedArray, sizes[i]);
-        start = clock();
-        selection_sort(sortedArray, sizes[i]);
-        end = clock();
-        elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Selection sort.\n", sizes[i], elapsed);
+        // // Repeat for selection_sort
+        // arrayCopy(originalArray, sortedArray, sizes[i]);
+        // start = clock();
+        // selection_sort(sortedArray, sizes[i]);
+        // end = clock();
+        // elapsed = timediff(start, end);
+        // printf("Sorting %d values took %ld ms for Selection sort.\n", sizes[i], elapsed);
 
-        // Repeat for merge_sort without insertion
-        arrayCopy(originalArray, sortedArray, sizes[i]);
-        start = clock();
-        merge_sort(sortedArray, 0, sizes[i]-1);
-        end = clock();
-        elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Merge sort.\n", sizes[i], elapsed);
+        // // Repeat for merge_sort without insertion
+        // arrayCopy(originalArray, sortedArray, sizes[i]);
+        // start = clock();
+        // merge_sort(sortedArray, 0, sizes[i]-1);
+        // end = clock();
+        // elapsed = timediff(start, end);
+        // printf("Sorting %d values took %ld ms for Merge sort.\n", sizes[i], elapsed);
 
         //Repeat for quick_sort
         arrayCopy(originalArray, sortedArray, sizes[i]);
         start = clock();
         quicksort(sortedArray, 0, sizes[i]-1);
         end = clock();
-        elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Quick sort.\n", sizes[i], elapsed);
+        int elapsed = timediff(start, end);
+        printf("Sorting %d values took %d ms for Quick sort.\n", sizes[i], elapsed);
 
         // Repeat for merge_insertion_sort
         arrayCopy(originalArray, sortedArray, sizes[i]);
@@ -230,7 +230,7 @@ int main(){
         merge_insertion_sort(sortedArray, 0, sizes[i]-1);
         end = clock();
         elapsed = timediff(start, end);
-        printf("Sorting %d values took %ld ms for Merge Insertion sort.\n", sizes[i], elapsed);
+        printf("Sorting %d values took %d ms for Merge Insertion sort.\n", sizes[i], elapsed);
 
         free(sortedArray);
         free(originalArray);
