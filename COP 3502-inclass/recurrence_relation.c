@@ -1,4 +1,4 @@
-l#include <stdio.h>
+#include <stdio.h>
 
 
 int power(int n, int e){
