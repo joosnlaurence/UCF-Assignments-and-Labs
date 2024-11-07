@@ -70,14 +70,12 @@ int main(int argc, char* argv[]){
     char* text = readFile(inFile, byteSize);
     int len = strlen(text);
 
-    unsigned long checksum = byte_wide_checksum(text, bitSize);
+    unsigned int checksum = byte_wide_checksum(text, bitSize);
     
-    for(int i = 0; i<len; i++){
-        if(i%80 == 0)
-            printf("\n");
-        printf("%c", text[i]);
+    for(int i = 0; i<len; i+=80){
+        printf("\n%.80s", text + i);
     }
-    printf("\n%2d bit checksum is %8lx for all %4d chars\n",
+    printf("\n%2d bit checksum is %8x for all %4d chars\n",
              bitSize, checksum, len);
 
     fclose(inFile);

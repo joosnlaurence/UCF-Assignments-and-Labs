@@ -1,30 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <limits.h>
 
-unsigned long convert_to_unsigned_binary(char* string, int bit_size){
-    unsigned long result = 0;
-    int exp = bit_size - 8;
+unsigned int convert_to_unsigned_binary(char* string, int bit_size){
+    unsigned int result = 0;
+    int shamt = 8;
     int blockSize = bit_size/8;
     for(int i = 0; i<blockSize; i++){
-        result += (unsigned long)string[i] << exp;
-        exp -= 8;
+        result = result << shamt;
+        result += (unsigned int)string[i];
     }
 
     return result;
 }
 
-unsigned long byte_wide_checksum(char* string, int bit_size){
+unsigned int byte_wide_checksum(char* string, int bit_size){
     int byteSize = bit_size/8;
-    unsigned long mod = 1UL << bit_size;
-    unsigned long checksum = 0;
+    unsigned int bitmask = 1UL << bit_size -1;
+    unsigned int checksum = 0;
     char block[byteSize];
     for(int i = 0; i<strlen(string); i += byteSize){
         for(int k = 0; k<byteSize; k++)
             block[k] = string[i+k];
-        unsigned long blockSum = convert_to_unsigned_binary(block, bit_size);
-        checksum = (checksum + blockSum) % mod;
+        unsigned int blockSum = convert_to_unsigned_binary(block, bit_size);
+        // checksum = (checksum + blockSum) % mod;
+        checksum += blockSum;
+        checksum &= bitmask; 
     }
 
     return checksum;
@@ -70,14 +71,14 @@ int main(int argc, char* argv[]){
     char* text = readFile(inFile, byteSize);
     int len = strlen(text);
 
-    unsigned long checksum = byte_wide_checksum(text, bitSize);
+    unsigned int checksum = byte_wide_checksum(text, bitSize);
     
     for(int i = 0; i<len; i++){
         if(i%80 == 0)
             printf("\n");
         printf("%c", text[i]);
     }
-    printf("\n%2d bit checksum is %8lx for all %4d chars\n",
+    printf("\n%2d bit checksum is %8x for all %4d chars\n",
              bitSize, checksum, len);
 
     fclose(inFile);
