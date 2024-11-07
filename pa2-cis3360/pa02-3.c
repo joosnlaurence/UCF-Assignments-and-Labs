@@ -40,11 +40,11 @@ unsigned int byte_wide_checksum(char* string, int bit_size){
 }
 
 char* readFile(FILE* f, int blockSize){
-    fseek(f,0,SEEK_END);
+    fseek(f, 0, SEEK_END);
     int textSize = ftell(f);
     fseek(f, 0, SEEK_SET);
 
-    int padSize = (blockSize - (textSize % blockSize)) % blockSize;
+    int padSize = (blockSize - textSize % blockSize) % blockSize;
 
     char* text = (char*)malloc(textSize + padSize + 1);
     fread(text, sizeof(char), textSize, f);
