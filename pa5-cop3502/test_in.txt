@@ -1,0 +1,1001 @@
+1000
+add aaaa 1
+add aaab 75
+add aaac 40
+add aaad 58
+add aaae 72
+add aaaf 6
+add aaag 57
+add aaah 37
+add aaai 26
+add aaaj 18
+add aaak 35
+add aaal 34
+add aaam 98
+add aaan 83
+add aaao 90
+add aaap 44
+add aaaq 94
+add aaar 81
+add aaas 39
+add aaat 45
+add aaau 73
+add aaav 60
+add aaaw 90
+add aaax 4
+add aaay 81
+add aaaz 92
+add aaba 20
+add aabb 38
+add aabc 74
+add aabd 56
+add aabe 97
+add aabf 89
+add aabg 62
+add aabh 64
+add aabi 39
+add aabj 56
+add aabk 36
+add aabl 53
+add aabm 4
+add aabn 34
+add aabo 8
+add aabp 69
+add aabq 98
+add aabr 32
+add aabs 87
+add aabt 70
+add aabu 34
+add aabv 82
+add aabw 29
+add aabx 66
+add aaby 16
+add aabz 21
+add aaca 18
+add aacb 89
+add aacc 67
+add aacd 54
+add aace 28
+add aacf 57
+add aacg 25
+add aach 26
+add aaci 42
+add aacj 88
+add aack 35
+add aacl 72
+add aacm 42
+add aacn 36
+add aaco 32
+add aacp 93
+add aacq 51
+add aacr 12
+add aacs 83
+add aact 48
+add aacu 35
+add aacv 14
+add aacw 46
+add aacx 34
+add aacy 86
+add aacz 49
+add aada 66
+add aadb 22
+add aadc 26
+add aadd 87
+add aade 39
+add aadf 64
+add aadg 78
+add aadh 70
+add aadi 100
+add aadj 60
+add aadk 74
+add aadl 61
+add aadm 13
+add aadn 61
+add aado 54
+add aadp 88
+add aadq 69
+add aadr 46
+add aads 83
+add aadt 18
+add aadu 47
+add aadv 50
+add aadw 31
+add aacw 15
+add aabc 5
+add aaab 99
+add aaaj 27
+add aadr 44
+add aaco 75
+add aabq 16
+add aacq 28
+add aacx 63
+add aadc 27
+add aaav 44
+add aacv 36
+add aabu 19
+add aacf 14
+add aade 19
+add aaaw 11
+add aacm 44
+add aacy 33
+add aaaj 77
+add aabo 23
+add aaaf 70
+deduct aabq 75
+add aadi 57
+add aaas 48
+add aaba 13
+add aabp 92
+add aaad 62
+add aaca 94
+add aada 95
+add aaas 91
+add aacl 22
+add aaat 88
+add aacg 45
+add aaaq 55
+add aabw 96
+add aadf 91
+add aabr 94
+add aaan 10
+add aaaf 13
+add aadd 38
+add aadu 83
+add aaaz 55
+add aabl 6
+add aabu 77
+deduct aaas 32
+add aacu 87
+add aabs 59
+add aacf 87
+add aadg 30
+add aadt 39
+add aabz 71
+add aadr 41
+add aaar 10
+add aacp 59
+add aabx 99
+add aadm 59
+deduct aaco 20
+add aaar 44
+add aaam 10
+add aabk 28
+add aabv 85
+add aaai 71
+add aabo 21
+deduct aadd 94
+add aadh 17
+add aadn 36
+add aadb 18
+add aabk 73
+deduct aadf 35
+add aadm 43
+deduct aabx 30
+add aabh 70
+add aadt 99
+deduct aadi 10
+deduct aaca 15
+add aaao 76
+add aaco 93
+add aacl 4
+add aadc 98
+add aadp 68
+add aaau 75
+deduct aabx 59
+add aabi 37
+add aaaf 41
+deduct aaco 43
+deduct aabs 31
+add aaaa 64
+add aabq 89
+deduct aabp 69
+add aadw 54
+deduct aacf 16
+deduct aaat 18
+deduct aadu 15
+add aadl 7
+add aaay 29
+deduct aabs 62
+deduct aaaf 44
+add aadh 99
+deduct aadc 100
+deduct aabu 49
+add aabt 41
+add aaai 58
+add aaae 95
+deduct aabv 40
+add aacj 39
+deduct aadr 95
+add aadj 64
+add aade 66
+add aaaa 64
+add aacw 5
+deduct aaaz 55
+deduct aabw 47
+add aadd 59
+deduct aacp 77
+add aacw 25
+add aabn 4
+deduct aacu 46
+add aacv 64
+add aabu 53
+add aaap 66
+add aabl 46
+add aacm 27
+deduct aaau 14
+deduct aadu 80
+add aacq 76
+add aabd 59
+deduct aadg 78
+add aacp 99
+deduct aaaa 88
+add aadw 20
+deduct aaam 48
+add aabc 53
+add aabm 21
+add aaba 43
+add aabe 27
+deduct aadt 94
+add aacb 100
+add aace 41
+add aaci 24
+add aacx 97
+deduct aaay 100
+deduct aabc 60
+deduct aadh 59
+add aabp 34
+deduct aaaw 100
+add aacd 97
+deduct aaco 25
+deduct aadf 72
+add aabz 91
+add aads 48
+add aadf 19
+deduct aaaj 19
+add aack 62
+deduct aade 54
+add aaal 55
+deduct aabe 5
+add aadr 86
+deduct aada 76
+add aaaa 49
+deduct aaab 11
+deduct aabl 64
+add aadv 40
+deduct aabd 59
+deduct aadp 7
+add aaaw 68
+add aaaz 61
+add aabx 52
+add aaci 27
+add aacs 84
+deduct aabh 67
+deduct aaav 24
+add aaay 74
+add aabd 89
+deduct aacb 66
+deduct aacv 5
+add aabn 84
+add aaal 51
+deduct aabk 40
+deduct aacy 53
+add aado 40
+add aadf 54
+deduct aaaj 2
+add aabs 64
+deduct aabq 75
+deduct aadm 5
+add aabf 63
+add aabc 4
+add aadn 92
+deduct aadj 21
+deduct aabz 89
+add aadt 30
+add aach 54
+add aaby 93
+add aace 3
+deduct aacs 40
+deduct aaar 98
+add aadg 64
+add aabz 10
+add aacw 16
+add aaan 5
+add aacl 67
+add aace 89
+add aadk 38
+add aadb 20
+deduct aaab 89
+deduct aabd 52
+deduct aaau 77
+add aabk 84
+deduct aabs 44
+add aaam 48
+deduct aadh 17
+add aaca 32
+add aabd 8
+deduct aadk 1
+add aabs 90
+deduct aaby 3
+add aabj 20
+deduct aabk 30
+add aabj 62
+add aaax 52
+deduct aacb 80
+deduct aaaq 55
+deduct aabr 6
+deduct aabd 83
+add aabb 87
+add aaaw 60
+deduct aabb 20
+deduct aabt 54
+add aack 54
+deduct aacs 95
+deduct aacd 22
+add aacr 78
+add aact 66
+add aach 87
+add aadu 73
+add aaac 39
+deduct aaaw 38
+add aabg 55
+add aabq 13
+add aadl 89
+add aaau 99
+deduct aacp 100
+deduct aaby 13
+add aabh 100
+deduct aacm 25
+deduct aabg 39
+add aaax 94
+deduct aadl 7
+deduct aadn 95
+add aabd 6
+deduct aach 89
+add aacg 22
+deduct aaad 2
+add aade 31
+deduct aabu 37
+add aaaa 56
+add aadg 36
+deduct aadk 2
+deduct aaat 91
+deduct aads 72
+add aada 13
+add aach 15
+add aacs 18
+deduct aadu 48
+deduct aadh 6
+deduct aacj 56
+add aaah 78
+deduct aaae 70
+add aadb 27
+add aacb 25
+add aaab 34
+deduct aaau 17
+deduct aadg 39
+add aabd 34
+deduct aaah 61
+deduct aabk 96
+deduct aadp 6
+deduct aabn 47
+deduct aabr 88
+add aaah 84
+add aaat 69
+deduct aabe 5
+add aabn 70
+deduct aadm 90
+add aacy 63
+add aacg 18
+add aach 2
+deduct aadw 72
+add aacz 5
+deduct aabs 82
+add aadn 94
+add aaav 31
+deduct aabh 81
+deduct aadp 12
+add aacn 47
+deduct aabx 76
+deduct aaah 56
+deduct aadk 80
+add aadt 46
+deduct aaal 62
+add aacp 39
+deduct aacf 72
+deduct aabj 14
+deduct aacl 20
+deduct aaab 61
+add aaah 36
+add aabt 98
+add aabs 53
+deduct aaah 65
+add aacc 46
+add aadb 28
+add aacz 3
+deduct aaau 48
+deduct aacx 79
+add aadg 32
+deduct aace 41
+add aaab 43
+deduct aabs 70
+add aacj 84
+add aabh 87
+add aaay 55
+add aabk 41
+deduct aabp 99
+deduct aade 19
+deduct aack 49
+add aaaw 81
+add aaaf 54
+add aaaq 84
+deduct aadt 78
+add aadv 64
+add aabu 73
+deduct aadj 63
+deduct aaaw 69
+deduct aacw 69
+deduct aaad 1
+deduct aack 15
+add aabk 80
+deduct aaav 91
+add aacf 80
+add aacw 21
+add aaav 17
+add aabi 17
+add aacw 29
+deduct aadl 66
+add aacm 28
+add aadu 98
+deduct aabk 7
+deduct aaaq 62
+deduct aaad 5
+deduct aacm 5
+add aaag 48
+deduct aaas 93
+add aacz 90
+add aadd 95
+deduct aacd 24
+deduct aabj 2
+deduct aaaz 95
+add aaar 33
+add aaat 54
+add aaan 75
+add aaak 17
+deduct aadd 19
+add aabr 75
+add aacb 21
+add aacu 81
+deduct aabe 17
+deduct aact 35
+deduct aacz 40
+add aada 72
+add aacn 28
+deduct aadg 18
+add aaak 59
+deduct aaai 94
+deduct aabj 86
+add aabl 68
+deduct aacv 2
+deduct aaca 64
+deduct aabn 51
+deduct aacl 46
+deduct aaco 36
+deduct aadp 88
+deduct aabh 26
+add aacs 3
+add aadc 80
+add aaac 96
+deduct aadv 94
+deduct aaax 53
+deduct aabk 77
+add aact 99
+add aacl 37
+deduct aabr 81
+add aaar 34
+add aaby 26
+add aaba 61
+deduct aabu 78
+deduct aaak 22
+deduct aaad 48
+add aabo 81
+add aaas 54
+deduct aaby 75
+add aaab 46
+add aabx 58
+add aabd 47
+add aabe 36
+deduct aaag 91
+add aabm 61
+deduct aacc 20
+add aaah 43
+add aadp 82
+deduct aaao 61
+deduct aact 65
+add aaaz 67
+add aabi 87
+add aadq 21
+add aads 75
+add aaax 5
+deduct aacq 44
+deduct aabz 43
+deduct aadi 3
+deduct aaap 36
+add aaco 56
+add aabk 3
+deduct aabo 4
+add aaca 82
+add aadv 11
+add aabq 56
+add aacr 50
+add aaai 23
+deduct aaba 37
+add aabz 94
+add aabg 11
+deduct aada 4
+deduct aacf 46
+add aabg 8
+deduct aadp 52
+deduct aadu 75
+deduct aabd 32
+add aadm 94
+deduct aabf 19
+deduct aacp 95
+add aabd 41
+deduct aacn 70
+add aadp 67
+add aadv 68
+add aadk 31
+deduct aacz 83
+deduct aacr 11
+deduct aaaq 100
+add aabk 77
+deduct aabl 10
+deduct aaao 45
+add aacb 46
+deduct aadd 61
+deduct aaay 14
+add aabp 39
+deduct aaaa 57
+deduct aace 75
+add aabu 25
+deduct aadd 9
+deduct aacy 95
+add aabs 14
+add aaaq 72
+deduct aabk 35
+deduct aabq 20
+add aacp 57
+add aaae 74
+deduct aadg 25
+add aace 42
+deduct aaay 7
+add aabp 84
+add aaba 26
+add aace 99
+deduct aacg 87
+deduct aaab 95
+deduct aadi 16
+add aaab 13
+deduct aace 80
+deduct aaaz 89
+add aadt 20
+deduct aabe 1
+add aado 39
+deduct aadr 41
+deduct aadf 66
+add aadf 49
+add aacg 51
+add aacs 65
+deduct aabt 9
+deduct aadn 53
+deduct aacq 98
+add aabg 2
+add aadw 9
+deduct aabp 68
+deduct aaat 49
+add aaag 90
+deduct aads 86
+deduct aaay 31
+deduct aabz 56
+deduct aado 81
+deduct aadb 35
+deduct aadi 56
+add aabs 48
+deduct aabq 77
+add aaak 36
+deduct aaba 96
+add aadr 93
+add aabg 61
+deduct aact 45
+add aaaa 54
+deduct aadv 78
+add aach 71
+deduct aabo 55
+add aact 32
+deduct aabe 62
+add aadb 23
+deduct aaae 35
+add aabj 91
+deduct aacb 29
+add aacp 22
+add aacz 34
+deduct aacf 74
+add aaba 56
+add aaal 61
+deduct aabh 3
+add aabm 19
+add aado 67
+deduct aaaf 19
+add aaai 47
+deduct aacx 33
+add aabp 41
+deduct aadc 89
+deduct aacu 85
+deduct aaar 36
+deduct aabv 54
+add aadt 96
+add aaao 69
+add aaba 56
+add aaaq 31
+deduct aabj 80
+deduct aaca 13
+deduct aabg 92
+deduct aado 21
+deduct aadn 48
+deduct aaac 93
+deduct aach 43
+add aadd 76
+add aabl 65
+add aabe 73
+add aaci 90
+add aaar 17
+deduct aacb 11
+deduct aacm 57
+deduct aacs 27
+deduct aabs 96
+add aacm 55
+add aadw 81
+deduct aaco 100
+add aacw 62
+deduct aaam 85
+add aabw 9
+deduct aadm 79
+add aacp 81
+deduct aacv 100
+add aadv 40
+add aacb 79
+deduct aadw 42
+add aabs 96
+deduct aacp 67
+add aaby 57
+add aack 39
+add aabz 58
+deduct aabf 19
+add aado 41
+add aacz 94
+add aaay 21
+deduct aaae 47
+deduct aaak 52
+deduct aace 83
+add aacv 43
+deduct aabd 86
+deduct aacz 94
+add aabj 89
+add aabg 41
+deduct aacm 59
+deduct aabg 63
+deduct aabx 69
+deduct aaci 93
+deduct aadd 10
+deduct aabs 68
+deduct aadr 72
+deduct aacl 32
+add aace 63
+add aaac 90
+add aaaz 59
+deduct aadv 96
+deduct aacj 99
+deduct aadh 34
+add aaco 72
+deduct aadd 12
+deduct aacd 92
+add aaae 12
+deduct aadp 49
+deduct aadd 89
+deduct aadt 10
+add aabr 53
+add aadl 21
+deduct aabi 18
+deduct aacl 67
+deduct aaay 90
+deduct aaba 20
+deduct aaaj 93
+add aabx 44
+add aabs 28
+add aadj 1
+deduct aadl 1
+add aaam 57
+add aadi 42
+add aabg 36
+deduct aacw 11
+add aacn 96
+deduct aaca 69
+add aaau 43
+add aaaz 43
+deduct aabt 28
+add aadj 4
+deduct aaaw 31
+add aacm 60
+deduct aadb 3
+add aaay 73
+add aads 71
+add aadm 82
+deduct aadt 67
+add aaad 33
+deduct aadi 13
+deduct aaaq 1
+add aabg 21
+add aaaj 36
+deduct aaal 78
+deduct aaae 95
+deduct aabm 28
+add aadt 37
+add aaay 53
+deduct aack 34
+deduct aada 44
+add aaad 13
+deduct aado 28
+add aabx 94
+add aadd 21
+deduct aabf 76
+add aacs 11
+add aabm 28
+add aabf 7
+deduct aaag 94
+add aaaj 6
+deduct aabj 13
+deduct aaaz 51
+add aadw 10
+add aabd 80
+deduct aabz 13
+add aabr 95
+add aaab 10
+deduct aacb 67
+deduct aaba 99
+deduct aacr 10
+deduct aadi 59
+add aaci 50
+deduct aabr 7
+deduct aadt 29
+add aacy 73
+deduct aaay 30
+add aadj 23
+add aacj 36
+add aack 32
+deduct aaas 70
+deduct aada 21
+add aaak 55
+deduct aaby 59
+add aadv 7
+add aacf 19
+add aadi 84
+add aadc 30
+add aaaw 15
+deduct aack 28
+deduct aabj 41
+add aadg 45
+deduct aadm 53
+add aadj 39
+deduct aacr 97
+add aadc 72
+deduct aadr 26
+add aadh 94
+deduct aaad 2
+deduct aaan 65
+add aacx 39
+add aaae 98
+deduct aaao 99
+deduct aabp 66
+add aaag 35
+add aaal 67
+deduct aadi 47
+add aadd 21
+add aadk 61
+add aact 66
+deduct aaaa 84
+deduct aacn 77
+add aaas 64
+deduct aacx 61
+deduct aaaq 14
+add aacd 9
+add aacu 83
+deduct aaai 15
+add aabf 72
+deduct aaai 100
+add aabp 48
+add aaba 90
+deduct aada 7
+add aaaa 37
+deduct aaba 90
+deduct aacm 19
+deduct aadg 20
+deduct aabm 35
+add aaaz 79
+add aaap 10
+deduct aacb 54
+add aabs 43
+add aabm 43
+deduct aabp 52
+add aabc 28
+add aabn 63
+deduct aabi 90
+deduct aabn 11
+deduct aabn 50
+add aaav 69
+add aaby 19
+deduct aabc 84
+add aaaj 82
+deduct aado 88
+deduct aacy 19
+add aacy 88
+deduct aaay 60
+add aaca 40
+add aacl 77
+deduct aaae 96
+deduct aabu 55
+add aadn 15
+deduct aaan 72
+add aabp 69
+deduct aadg 36
+add aaab 84
+deduct aaaf 7
+deduct aaaz 64
+add aabu 88
+deduct aaco 83
+add aadv 91
+add aaap 81
+deduct aadc 51
+deduct aaax 9
+deduct aacl 16
+add aada 17
+add aacj 4
+deduct aaad 59
+deduct aacp 25
+add aabw 19
+add aabq 70
+deduct aabl 89
+add aaan 96
+add aacn 45
+add aabq 54
+add aabc 34
+deduct aach 68
+deduct aabu 3
+add aacc 83
+add aabi 3
+deduct aaap 25
+deduct aaak 38
+add aadr 46
+add aadu 75
+deduct aabk 73
+add aacg 75
+deduct aada 95
+add aacq 28
+add aaba 2
+deduct aacc 95
+add aaam 36
+add aaar 56
+deduct aaci 5
+add aabv 31
+deduct aaaj 79
+deduct aaaz 100
+add aacc 96
+deduct aabz 95
+add aade 6
+add aaak 86
+deduct aadf 1
+deduct aadl 52
+add aacv 18
+deduct aaau 50
+add aadm 4
+add aack 53
+search aaaa
+search aaab
+search aaac
+search aaad
+search aaae
+search aaaf
+search aaag
+search aaah
+search aaai
+search aaaj
+search aaak
+search aaal
+search aaam
+search aaan
+search aaao
+search aaap
+search aaaq
+search aaar
+search aaas
+search aaat
+search aaau
+search aaav
+search aaaw
+search aaax
+search aaay
+search aaaz
+search aaba
+search aabb
+search aabc
+search aabd
+search aabe
+search aabf
+search aabg
+search aabh
+search aabi
+search aabj
+search aabk
+search aabl
+search aabm
+search aabn
+search aabo
+search aabp
+search aabq
+search aabr
+search aabs
+search aabt
+search aabu
+search aabv
+search aabw
+search aabx
+search aaby
+search aabz
+search aaca
+search aacb
+search aacc
+search aacd
+search aace
+search aacf
+search aacg
+search aach
+search aaci
+search aacj
+search aack
+search aacl
+search aacm
+search aacn
+search aaco
+search aacp
+search aacq
+search aacr
+search aacs
+search aact
+search aacu
+search aacv
+search aacw
+search aacx
+search aacy
+search aacz
+search aada
+search aadb
+search aadc
+search aadd
+search aade
+search aadf
+search aadg
+search aadh
+search aadi
+search aadj
+search aadk
+search aadl
+search aadm
+search aadn
+search aado
+search aadp
+search aadq
+search aadr
+search aads
+search aadt
+search aadu
+search aadv
+search aadw
