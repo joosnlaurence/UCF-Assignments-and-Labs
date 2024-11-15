@@ -13,10 +13,10 @@ typedef struct binHeap{
     int size; // heap size
 }binHeap;
 
-binHeap* initHeap(){
+binHeap* initHeap(int cap){
     binHeap* heap = (binHeap*)malloc(sizeof(binHeap));
-    heap->capacity = CAP;
-    heap->heaparray = (int*)malloc(sizeof(int)*(CAP + 1));
+    heap->capacity = cap;
+    heap->heaparray = (int*)malloc(sizeof(int)*(cap + 1));
     heap->size = 0;
 
     return heap;
@@ -93,7 +93,7 @@ void percolateDown(binHeap* h, int i){
     if(2*i+1 <= h->size){
         int left = h->heaparray[2*i];
         int right = h->heaparray[2*i+1];
-        int max = (left < right) ? 2*i : 2*i+1;
+        int max = (left > right) ? 2*i : 2*i+1;
 
         if(h->heaparray[i] < h->heaparray[max])
             swap(&h->heaparray[i], &h->heaparray[max]);
@@ -123,7 +123,7 @@ int removeMin(binHeap* h){
     return -1;
 }*/
 
-int removeMin(binHeap* h){
+int removeMax(binHeap* h){
     int retval;
 
     if(h->size > 0){
@@ -141,12 +141,37 @@ void heapify(binHeap* h){
     }
 }
 
+void printHeap(binHeap* h){
+    int leftmostChild = 1;
+    
+    while(leftmostChild <= h->size){
+        for(int i = leftmostChild; i<=leftmostChild*2-1 && i<=h->size; i++){
+            printf("%d ", h->heaparray[i]); 
+        }
+        puts("");
+        leftmostChild *= 2;      
+    }
+}
+
 int main(){
     srand(time(NULL));
-    binHeap* heapPtr = initHeap();
+    int cap = 100;
+    binHeap* heapPtr = initHeap(cap);
 
-    for(int i = 0; i< )
-
+    int arr[cap];
+    for(int i = 0; i<cap; i++){
+        int val = rand() % (cap*10) + 1; 
+        heapPtr->heaparray[i+1] = val;
+        heapPtr->size++;
+    }
+    //printf("%d\n", heapPtr->size);
+    
+    heapify(heapPtr);
+    printHeap(heapPtr); 
+    for(int i = 1; i<=heapPtr->size; i++){
+        printf("%d ", removeMax(heapPtr));
+    }
+    puts("");
 
     return 0;
 }
