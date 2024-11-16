@@ -93,15 +93,15 @@ void percolateDown(binHeap* h, int i){
     if(2*i+1 <= h->size){
         int left = h->heaparray[2*i];
         int right = h->heaparray[2*i+1];
-        int max = (left > right) ? 2*i : 2*i+1;
+        int min = (left < right) ? 2*i : 2*i+1;
 
-        if(h->heaparray[i] < h->heaparray[max])
-            swap(&h->heaparray[i], &h->heaparray[max]);
+        if(h->heaparray[i] > h->heaparray[min])
+            swap(&h->heaparray[i], &h->heaparray[min]);
 
-        percolateDown(h, max);
+        percolateDown(h, min);
     }
     else if(2*i <= h->size){
-        if(h->heaparray[i] < h->heaparray[2*i])
+        if(h->heaparray[i] > h->heaparray[2*i])
             swap(&h->heaparray[i], &h->heaparray[2*i]);
     }
 }
@@ -158,19 +158,17 @@ int main(){
     int cap = 100;
     binHeap* heapPtr = initHeap(cap);
 
-    int arr[cap];
-    for(int i = 0; i<cap; i++){
-        int val = rand() % (cap*10) + 1; 
-        heapPtr->heaparray[i+1] = val;
-        heapPtr->size++;
-    }
+    int arr[] = {0, 77, 8, 45, 12, 2, 20, 67, 1, 11, 7, 46};
+    /*for(int i = 0; i<cap; i++){*/
+    /*    int val = rand() % (cap*10) + 1; */
+    /*    heapPtr->heaparray[i+1] = val;*/
+    /*    heapPtr->size++;*/
+    /*}*/
     //printf("%d\n", heapPtr->size);
-    
+    heapPtr->heaparray = arr;
+    heapPtr->size = 11;
     heapify(heapPtr);
-    printHeap(heapPtr); 
-    for(int i = 1; i<=heapPtr->size; i++){
-        printf("%d ", removeMax(heapPtr));
-    }
+    printHeap(heapPtr);    
     puts("");
 
     return 0;
