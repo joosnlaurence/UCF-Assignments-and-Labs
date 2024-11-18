@@ -140,7 +140,7 @@ int searchTable(struct htable *h, char word[]) {
 
     int hashval = hashvalue(word);
     int n = 1;
-    // See what comes first, the word or a blank spot.
+    // See what comes first, the word or a blank spot, using quadratic probing
     while (strcmp(h->entries[hashval], "") != 0 &&
            strcmp(h->entries[hashval], word) != 0){
         hashval = (hashval + n*n)%TABLE_SIZE;
@@ -164,7 +164,7 @@ void deleteTable(struct htable *h, char word[]) {
 
     int hashval = hashvalue(word);
     int n = 1;
-    // See what comes first, the word or a blank spot.
+    // See what comes first, the word or a blank spot, using quadratic probing
     while (strcmp(h->entries[hashval], "") != 0 &&
            strcmp(h->entries[hashval], word) != 0){
         hashval = (hashval + n*n)%TABLE_SIZE;
