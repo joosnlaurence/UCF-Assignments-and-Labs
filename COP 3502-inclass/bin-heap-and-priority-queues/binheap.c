@@ -133,6 +133,7 @@ int removeMax(binHeap* h){
 
         return retval;
     }
+    return -1;
 }
 
 void heapify(binHeap* h){
