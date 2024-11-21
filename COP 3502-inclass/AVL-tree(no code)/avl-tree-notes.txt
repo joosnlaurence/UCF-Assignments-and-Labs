@@ -1,0 +1,23 @@
+AVL Trees: Insertion
+=====================
+Motivation: Unbalanced BSTs can negate the efficiency of BSTs for searching.
+    - If you insert an ordered list into a bst, then the tree will resemble a linked
+    list and will have a search runtime of O(n)
+AVL Trees are balanced bsts, named after the authro
+    - defintion: heights of the subtrees of any given node differ by no more than 1
+All avl trees have a balance factor (BF)
+    - BF = hl - hr = height of left subtree - height of right subtree
+    - BF must be -1, 0, or 1, otherwise not an avl tree because not balanced
+    - |hl - hr| <= 1
+Implementation: data, left, right, BF
+Pros: search, O(logn) = O(height)
+Cons: Generally rigid, insertions may unbalance tree
+
+If a tree becomes unbalanced because of an insertion in the left child's left
+subtree or an insertion in the right child's right subtree, then you need to perform
+a single rotation. (LL, RR)
+
+`If a tree becomes unbalanced because of an insertion in the left child's right
+subtree or an insertion in the right child's left subtree, then you need to perform
+a single rotation. (LR, RL)
+
