@@ -53,10 +53,7 @@ void insert(dict* d, char* str, int i, int freq){
     
 }
 
-/* Returns a string of the characters most likely to appear next after a prefix.
- * If the prefix is not in the dictionary or the prefix has no subsequent chars 
- *  in the dictionary, then returns NULL*/
-char* nextLikelyChars(dict* d, char* str){
+dict* search(dict* d, char* str){
     int size = 0;
     
     // First check to see if the prefix is in the dictionary
@@ -69,7 +66,18 @@ char* nextLikelyChars(dict* d, char* str){
 
         size++;
     }
+
+    return d;
+}
+
+/* Returns a string of the characters most likely to appear next after a prefix.
+ * If the prefix is not in the dictionary or the prefix has no subsequent chars 
+ *  in the dictionary, then returns NULL*/
+char* nextLikelyChars(dict* d, char* str){
     
+    d = search(d, str);
+    if(d == NULL) return NULL;
+
     char* maxFreqChars = (char*)malloc(MAX_CHARS);
     int maxFreq = 0;
     int maxCount = 0; // Represents the size of the next likely chars string
