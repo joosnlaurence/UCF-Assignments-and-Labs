@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUM_CHARS 95
+#define NUM_CHARS 26
 
 // A trie is a tree in whicn *every node* has 26 children, to store 26 letters in the alphabet
 // The string is not stored in the children, rather, the string is stored as a path through the trie
@@ -26,23 +26,37 @@ struct trie_node* createNode(){
 
 void insertStr(struct trie_node* root, char* str, int i){
     char ch = str[i]-(NUM_CHARS == 95 ? ' ' : 'a');
-    if(str[i] == '\0'){
-        root->count++;
-        return;
+    if(str[i] != '\0'){
+        if(root->children[ch] == NULL){
+            root->children[ch] = createNode();
+        }
+        insertStr(root->children[ch], str, i+1);
     }
-    else if(root->children[ch] == NULL){
-        root->children[ch] = createNode();
+    root->count++;
+}
+
+void insertStrIter(struct trie_node* root, char* str){
+    int i = 0;
+    while(str[i] != '\0'){
+        char ch = str[i] - (NUM_CHARS == 95 ? ' ' : 'a');
+
+        if(root->children[ch] == NULL)
+            root->children[ch] = createNode();
+        root = root->children[ch];
+        i++;
     }
-    insertStr(root->children[ch], str, i+1);
+    root->count++;
 }
 
 int searchTrie(struct trie_node* root, char* str, int i){
-    if(root == NULL)
-        return 0;
-    else if(str[i] == '\0'){
+    
+    if(str[i] == '\0'){
         return root->count;
     }
     char ch = str[i] - (NUM_CHARS == 95 ? ' ' : 'a');
+    if(root->children[ch] == NULL)
+        return 0;
+    
     return searchTrie(root->children[ch], str, i+1); 
 }
 
@@ -91,7 +105,7 @@ int main(){
             case 1:
                 printf("Enter a string to insert: ");
                 scanf(" %" MAX_STR "[^\n]", str);
-                insertStr(root, str, 0);
+                insertStrIter(root, str);
                 break;
             case 2:
                 printf("Enter a string to search for: ");
@@ -110,6 +124,7 @@ int main(){
                 break;
             case 4:
                 printf("Goodbye\n");
+                free(root);
                 return 0;
             default:
                 printf("Invalid Command\n");
