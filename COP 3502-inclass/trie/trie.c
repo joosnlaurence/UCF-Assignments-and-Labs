@@ -27,15 +27,16 @@ struct trie_node* createNode(){
 // When you delete a string from a trie, you have to take into account the resulting leaf nodes
 // If you see that the count of a leaf node is equal to zero, then you should free that node
 
-void insertStr(struct trie_node* root, char* str, int i){
-    char ch = str[i]-(NUM_CHARS == 95 ? ' ' : 'a');
-    if(str[i] != '\0'){
+void insertStr(struct trie_node* root, char* str){
+    char ch = str[0]-(NUM_CHARS == 95 ? ' ' : 'a');
+    if(str[0] != '\0'){
         if(root->children[ch] == NULL){
             root->children[ch] = createNode();
         }
-        insertStr(root->children[ch], str, i+1);
+        insertStr(root->children[ch], str + 1);
     }
-    root->count++;
+    else
+        root->count++;
 }
 
 void insertStrIter(struct trie_node* root, char* str){
@@ -111,6 +112,7 @@ void printAll(struct trie_node* root){
 }
 
 
+
 int main(){
     struct trie_node* root = createNode();
 
@@ -124,7 +126,7 @@ int main(){
             case 1:
                 printf("\nEnter a string to insert: ");
                 scanf(" %" MAX_STR "[^\n]", str);
-                insertStrIter(root, str);
+                insertStr(root, str);
                 break;
             case 2:
                 printf("\nEnter a string to search for: ");
