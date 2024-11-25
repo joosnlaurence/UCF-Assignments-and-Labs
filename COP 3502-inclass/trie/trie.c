@@ -2,6 +2,9 @@
 #include <stdlib.h>
 
 #define NUM_CHARS 26
+#define MAX 1000
+#define MAX_STR "1000"
+
 
 // A trie is a tree in whicn *every node* has 26 children, to store 26 letters in the alphabet
 // The string is not stored in the children, rather, the string is stored as a path through the trie
@@ -81,7 +84,7 @@ int deleteString(struct trie_node* root, char* str, int i){
     char ch = str[i]-(NUM_CHARS == 95 ? ' ' : 'a');
     int found = deleteString(root->children[ch], str, i+1);
 
-    if(isEmpty(root->children[ch]) && root->children[ch]->count == 0){
+    if(found && isEmpty(root->children[ch]) && root->children[ch]->count == 0){
         struct trie_node* temp = root->children[ch];
         root->children[ch] = NULL;
         free(temp);
@@ -89,8 +92,24 @@ int deleteString(struct trie_node* root, char* str, int i){
     return found;
 }
 
-#define MAX 1000
-#define MAX_STR "1000"
+void printAllHelper(struct trie_node* root, char* word, int len){
+    if(root == NULL) return;
+    if(root->count > 0)
+        printf("%s\n", word);
+
+    for(int i = 0; i<26; i++){
+        word[len] = (char)(i + 'a');
+        word[len+1] = '\0';
+        printAllHelper(root->children[i], word, len+1);
+    }
+}
+
+void printAll(struct trie_node* root){
+    char word[MAX+1];
+    word[0] = '\0';
+    printAllHelper(root, word, 0);
+}
+
 
 int main(){
     struct trie_node* root = createNode();
@@ -103,14 +122,14 @@ int main(){
         char str[MAX+1];
         switch(ch){
             case 1:
-                printf("Enter a string to insert: ");
+                printf("\nEnter a string to insert: ");
                 scanf(" %" MAX_STR "[^\n]", str);
                 insertStrIter(root, str);
                 break;
             case 2:
-                printf("Enter a string to search for: ");
+                printf("\nEnter a string to search for: ");
                 scanf(" %" MAX_STR "[^\n]", str);
-                printf("%s found %d times\n\n", str, searchTrie(root, str, 0));
+                printf("%s found %d times\n", str, searchTrie(root, str, 0));
                 break;
             case 3:
                 printf("Enter a string to delete from the trie: ");
@@ -130,5 +149,8 @@ int main(){
                 printf("Invalid Command\n");
                 break;
         }
+        printf("\n%s\n", "Printing all of the strings...");
+        printAll(root);
+        puts("");
     }
 }
